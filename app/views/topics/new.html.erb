@@ -1,0 +1,21 @@
+<div>
+  <b>New Topic</b>
+  <%= form_for @topic, :url => topics_path, :method => :post do |f| %>
+    <table>
+      <tr>
+        <th>Topic Name: </th>
+        <th><%= f.text_field :name %></th><br/>
+      </tr>
+      <tr>
+        <th>Content: </th>
+        <th>
+          <%= f.fields_for :posts do |post| %>
+            <%= post.hidden_field :user_id, value: current_user.id %>
+            <%= post.text_field :body %>
+          <% end %>
+        </th>
+      </tr>
+      <tr><th><%= f.submit "Create Topic" %></th></tr>
+    </table>
+  <% end %>
+</div>

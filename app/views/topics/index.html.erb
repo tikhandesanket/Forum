@@ -1,0 +1,24 @@
+<b>Topic Listing</b>
+<br/>
+<% if @topics.blank? %>
+  No any topic created. <%= link_to "Click here", new_topic_path %> to create topic and start conversation.
+<% else %>
+  <table>
+    <tr>
+      <th>Topic name</th>
+      <th>created by</th>
+      <th>created at</th>
+      <th>post count</th>
+      <th>View Topic </th>
+    <tr>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td><%= topic.name %></td>
+        <td><%= topic.user.email %></td>
+        <td><%= topic.created_at.strftime("%d-%m-%Y") %></td>
+        <td><%= topic.posts.count %></td>
+        <td><%= link_to "View","#"%></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
