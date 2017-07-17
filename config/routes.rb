@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   end
 
   resources :dashboards, only: [:index]
-  resources :posts
-  resources :topics
+  resources :topics do
+    member do
+      resources :posts, only: [:new, :edit]
+    end
+  end
+  resources :posts, only: [:index, :create]
 
 end

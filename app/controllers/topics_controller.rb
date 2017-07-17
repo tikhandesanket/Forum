@@ -12,7 +12,6 @@ class TopicsController < ApplicationController
   end
 
   def create
-    binding.pry
     topic = current_user.topics.build(topic_params)
     if topic.save
       flash[:success] = "Topic created successfully."
@@ -23,6 +22,8 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @topic = Topic.find_by_id(params[:id])
+    @posts = @topic.posts
   end
 
   def edit

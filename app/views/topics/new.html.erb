@@ -4,18 +4,18 @@
     <table>
       <tr>
         <th>Topic Name: </th>
-        <th><%= f.text_field :name %></th><br/>
+        <td><%= f.text_field :name %></td><br/>
       </tr>
       <tr>
         <th>Content: </th>
-        <th>
+        <td>
           <%= f.fields_for :posts do |post| %>
             <%= post.hidden_field :user_id, value: current_user.id %>
-            <%= post.text_field :body %>
+            <%= post.text_area :body, size: '50*10' %>
           <% end %>
-        </th>
+        </td>
       </tr>
-      <tr><th><%= f.submit "Create Topic" %></th></tr>
+      <tr><th><td><%= f.submit "Create Topic" %></td></th></tr>
     </table>
   <% end %>
 </div>

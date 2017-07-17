@@ -1,0 +1,12 @@
+Topic discussion: <%= @topic.name %>
+<div>
+  <%= link_to "share your opinion", new_post_path %>
+  <table>
+    <% @posts.each_with_index do |post, index| %>
+      <% sr_no = index + 1 %>
+      <tr>
+        <td><%= sr_no %> :- user: <%= post.user.email %> || comment: <%= post.body %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

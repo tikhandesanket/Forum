@@ -17,7 +17,7 @@
         <td><%= topic.user.email %></td>
         <td><%= topic.created_at.strftime("%d-%m-%Y") %></td>
         <td><%= topic.posts.count %></td>
-        <td><%= link_to "View","#"%></td>
+        <td><%= link_to "View", topic_path(topic.id) %></td>
       </tr>
     <% end %>
   </table>

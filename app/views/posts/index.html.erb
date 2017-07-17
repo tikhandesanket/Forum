@@ -1,0 +1,17 @@
+<div>
+  <label> All Posts </label>
+  <table>
+    <th>Sr No.</th>
+    <th>Topic name </th>
+    <th>Post body</th>
+    <th>user email</th>
+    <% @posts.each_with_index do |post, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= link_to post.topic.name, topic_path(post.topic.id) %></td>
+        <td><%= post.body %></td>
+        <td><%= post.user.email %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
