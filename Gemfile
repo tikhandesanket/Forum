@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18.4'
 gem 'devise'
 gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
+#gem 'permalink', '~> 2.0'
+gem 'friendly_id', '~> 5.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -2,19 +2,7 @@
   <b>New Topic</b>
   <%= form_for @topic, :url => topics_path, :method => :post do |f| %>
     <table>
-      <tr>
-        <th>Topic Name: </th>
-        <td><%= f.text_field :name %></td><br/>
-      </tr>
-      <tr>
-        <th>Content: </th>
-        <td>
-          <%= f.fields_for :posts do |post| %>
-            <%= post.hidden_field :user_id, value: current_user.id %>
-            <%= post.text_area :body, size: '50*10' %>
-          <% end %>
-        </td>
-      </tr>
+      <%= render partial: 'form', locals: {f: f} %>
       <tr><th><td><%= f.submit "Create Topic" %></td></th></tr>
     </table>
   <% end %>

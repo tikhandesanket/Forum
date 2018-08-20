@@ -1,7 +1,6 @@
-<label> Post : </label>
-<%= form_for @post, url: posts_path, :method => :post do |f| %>
-  <%= f.hidden_field :topic_id, value: @topic.id %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.text_area :body, size: '50*10' %><br/>
+<label>Topic Heading : <%= @topic.name %></label><br/>
+<label> Post Content: </label><br/>
+<%= form_for @post, url: topic_posts_path, :method => :post do |f| %>
+  <%= render partial: 'form', locals:{f: f}%>
   <%= f.submit "Save" %>
 <% end %>

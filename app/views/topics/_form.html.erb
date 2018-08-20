@@ -1,0 +1,17 @@
+<tr>
+  <th>Topic Name: </th>
+  <td>
+    <%= f.text_field :name %>
+    <%= display_error_message(@errors, :name, 'Name') %>
+  </td><br/>
+</tr>
+<tr>
+  <th>Content: </th>
+  <td>
+    <%= f.fields_for :posts do |post| %>
+      <%= post.hidden_field :user_id, value: current_user.id %>
+      <%= post.text_area :body, size: '50*10' %>
+      <%= display_error_message(@errors, :'posts.body', 'Content') %>
+    <% end %>
+  </td>
+</tr>

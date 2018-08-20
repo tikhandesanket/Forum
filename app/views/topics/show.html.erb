@@ -1,6 +1,6 @@
 Topic discussion: <%= @topic.name %>
 <div>
-  <%= link_to "share your opinion", new_post_path %>
+  <%= link_to "share your opinion", new_topic_post_path(@topic.slug) %>
   <table>
     <% @posts.each_with_index do |post, index| %>
       <% sr_no = index + 1 %>

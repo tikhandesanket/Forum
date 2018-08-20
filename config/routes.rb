@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   resources :dashboards, only: [:index]
   resources :topics do
-    member do
-      resources :posts, only: [:new, :edit]
-    end
+    resources :posts
   end
   resources :posts, only: [:index, :create]
 
