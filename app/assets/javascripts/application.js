@@ -19,4 +19,7 @@
 
 $(function(){
   /* Your JavaScript goes here... */
+  $(".alert").fadeOut(60000, function(){
+    $(this).html("");
+  });
 });

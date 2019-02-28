@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :find_topic, only: [:show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     if params[:tag].present?
@@ -30,7 +29,6 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @posts = @topic.posts
   end
 
   def edit
@@ -49,14 +47,6 @@ class TopicsController < ApplicationController
   private
   def topic_params
     params.require(:topic).permit(:name, :tag_list, posts_attributes: [:id, :body, :user_id, :_destroy])
-  end
-
-  def find_topic
-    @topic = current_user.topics.friendly.find(params[:id])
-    unless @topic.present?
-      flash[:alert] = "Invalid Access"
-      redirect_to topics_path
-    end
   end
 
   def store_first_post_as_topic_body(topic)

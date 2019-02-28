@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only:[:create, :edit, :update]
+  before_action :authenticate_user!, only:[:create, :edit, :update, :new]
   before_action :find_topic, only:[:new, :create, :index]
   def index
     @posts = @topic.posts.includes(:user).order('updated_at DESC').paginate(page: params[:page], per_page: 10)
