@@ -17,3 +17,32 @@
 .text-red{
 	color: #FF0000;
 }
+
+.footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding: 10px 0px 5px 0px;
+	background-color: grey;
+	color: white;
+	text-align: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  min-height: 89%;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -50px;
+}
+.footer, .push {
+  height: 50px;
+}
+
+span.inline-paragraph p.text-left{
+	float: left;
+}

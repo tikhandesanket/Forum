@@ -1,0 +1,17 @@
+<div class="row content">
+	<div class="col-sm-12">
+	  <h4><small>YOUR RECENT TOPICS</small></h4>
+	  <hr>
+	  <% @your_topics.each do |topic| %>
+		  <h2><%= topic.name.to_s.camelcase %></h2>
+		  <h5><span class="glyphicon glyphicon-time"></span> Post by <%= topic.user.email %>, <%= topic.created_at.strftime("%b %d, %Y") %>.</h5>
+		  <p>Tags: <%= topic_tag_label(topic).html_safe %></p><br>
+		  <p><%= (topic.body || topic.posts.first.body).to_s.truncate(500) %></p>
+		  <span class="inline-paragraph">
+		  	<p class="text-left" ><span class="badge badge-warning">Post Count : <%= topic.posts.count %></span></p>
+		  	<p class="text-right"><%= link_to('Continue Reading...', topic_posts_path(topic.slug), class: 'btn btn-link')%></p>
+		  </span>
+		  <hr/>
+		<% end %>
+	</div>
+</div>

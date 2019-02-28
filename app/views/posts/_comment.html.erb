@@ -1,0 +1,12 @@
+<% if post.present? && !@errors.present? %>
+	<div class="js_leave_comment">
+		<div class="col-sm-2 text-center">
+		  <%= image_tag post.user.photo_url, class: 'img-circle', alt: 'Avatar'%>
+		</div>
+		<div class="col-sm-10">
+		  <h4><%= post.user.email.split('@')[0]%> <small><%= post.created_at.strftime('%b %d, %Y, %H:%M %p')%></small></h4>
+		  <p><%= post.body %></p>
+		  <br>
+		</div>
+	</div>
+<% end %>

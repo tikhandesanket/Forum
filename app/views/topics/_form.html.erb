@@ -1,12 +1,16 @@
 <tr>
-  <th>Topic Name: </th>
+  <th>Topic Name : </th>
   <td>
     <%= f.text_field :name %>
     <%= display_error_message(@errors, :name, 'Name') %>
-  </td><br/>
+  </td>
 </tr>
 <tr>
-  <th>Content: </th>
+  <th><%= f.label :tag_list, "Tags (separated by commas)" %></th>
+  <td><%= f.text_field :tag_list %></td>
+</tr>
+<tr>
+  <th>Content : </th>
   <td>
     <%= f.fields_for :posts do |post| %>
       <%= post.hidden_field :user_id, value: current_user.id %>

@@ -1,0 +1,10 @@
+$(".js_leave_comment").parent().append("<%= escape_javascript(render('comment', :post => @post, :topic => @topic, post_count: @topic.posts.count)) %>");
+$("textarea[name='post[body]']").val('');
+var post_count = <%= @topic.posts.count %>
+$("#js_post_count").text(post_count);
+$('#js_message_label').remove();
+<% if @errors.present? %>
+	$("#validation_message").append("<p id='js_message_label' class='alert alert-danger alert-dismissible'>Something went wrong.</p>")
+<% else %>
+	$("#validation_message").append("<p id='js_message_label' class='alert alert-success alert-dismissible'>Post created successfully.</p>")
+<% end %>

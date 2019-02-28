@@ -1,17 +1,31 @@
-<div>
-  <label> All Posts </label>
-  <table>
-    <th>Sr No.</th>
-    <th>Topic name </th>
-    <th>Post body</th>
-    <th>user email</th>
-    <% @posts.each_with_index do |post, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><%= link_to post.topic.name, topic_path(post.topic.slug) %></td>
-        <td><%= post.body %></td>
-        <td><%= post.user.email %></td>
-      </tr>
+<div class="row content">
+  <div class="col-sm-12">
+    <h4><small>RECENT POSTS</small></h4>
+    <hr>
+    <h2><%= @topic.name.to_s.titleize %></h2>
+    <h5><span class="glyphicon glyphicon-time"></span> Post by <%= @topic.user.email %>, <%= @topic.created_at.strftime('%b %d, %Y') %>.</h5>
+    <h5><%= topic_tag_label(@topic).html_safe %></h5><br>
+    <p><%= @topic.body || @topic.posts.first.body %></p>
+    <hr>
+    <span id="validation_message"></span>
+    <h4>Leave a Comment:</h4>
+    <%= form_for @new_post, url: topic_posts_path, :method => :post, html:{id: 'comment_box', multipart: true, remote: true} do |f| %>
+      <% if current_user.present? %>
+        <div class="form-group">
+          <%= render partial: 'form', locals:{f: f}%>
+        </div>
+        <%= f.submit "Submit", class: "btn btn-success" %>
+      <% else %>
+        You have to login to access comment section. <%= link_to "Already have an account?", new_user_session_path, class: 'btn btn-success btn-sm'%> <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm"%>
+      <% end %>
     <% end %>
-  </table>
+    <br><br>
+    <p><span id="js_post_count" class="badge"><%= @posts.count %></span> Comments:</p><br>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <%= render partial: 'comment', locals:{post: post} %>
+      <% end %>
+    </div>
+    <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>

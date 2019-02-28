@@ -39,6 +39,13 @@ gem 'devise'
 gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
 #gem 'permalink', '~> 2.0'
 gem 'friendly_id', '~> 5.2.0'
+gem 'will_paginate-bootstrap'
+gem "less-rails"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'jquery-rails'
+gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
+gem 'acts-as-taggable-on', '~> 6.0'
+gem "figaro"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

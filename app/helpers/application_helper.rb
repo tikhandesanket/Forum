@@ -14,4 +14,10 @@ module ApplicationHelper
 		end
 		html
 	end
+
+	def topic_tag_label(topic)
+		label_tag = ['warning','success','danger','default','primary']
+		return topic.tag_list.map.with_index { |t,index| link_to(t, tag_path(t), class: "label label-#{label_tag[index]}")}.join(' ')
+	end
+
 end
