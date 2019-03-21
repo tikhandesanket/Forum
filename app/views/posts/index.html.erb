@@ -5,10 +5,18 @@
     <h2><%= @topic.name.to_s.titleize %></h2>
     <h5><span class="glyphicon glyphicon-time"></span> Post by <%= @topic.user.email %>, <%= @topic.created_at.strftime('%b %d, %Y') %>.</h5>
     <h5><%= topic_tag_label(@topic).html_safe %></h5><br>
-    <p><%= @topic.body || @topic.posts.first.body %></p>
+    <p><%= @topic.body.html_safe || @topic.posts.first.body.html_safe %></p>
     <hr>
+    <p><span id="js_post_count" class="badge"><%= @posts.count %></span> Comments:</p><br>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <%= render partial: 'comment', locals:{post: post} %>
+      <% end %>
+    </div>
+    <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+    <hr/>
     <span id="validation_message"></span>
-    <h4>Leave a Comment:</h4>
+    <h4>Share Your Thoughts</h4>
     <%= form_for @new_post, url: topic_posts_path, :method => :post, html:{id: 'comment_box', multipart: true, remote: true} do |f| %>
       <% if current_user.present? %>
         <div class="form-group">
@@ -20,12 +28,5 @@
       <% end %>
     <% end %>
     <br><br>
-    <p><span id="js_post_count" class="badge"><%= @posts.count %></span> Comments:</p><br>
-    <div class="row">
-      <% @posts.each do |post| %>
-        <%= render partial: 'comment', locals:{post: post} %>
-      <% end %>
-    </div>
-    <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
   </div>
 </div>

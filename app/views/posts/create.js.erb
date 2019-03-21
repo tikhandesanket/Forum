@@ -1,5 +1,7 @@
 $(".js_leave_comment").parent().append("<%= escape_javascript(render('comment', :post => @post, :topic => @topic, post_count: @topic.posts.count)) %>");
-$("textarea[name='post[body]']").val('');
+for (instance in CKEDITOR.instances){
+   CKEDITOR.instances[instance].setData(" ");
+}
 var post_count = <%= @topic.posts.count %>
 $("#js_post_count").text(post_count);
 $('#js_message_label').remove();

@@ -2,38 +2,40 @@
   <div class="col-sm-12">
     <span class="inline-paragraph">
       <p class="text-left"><b>Listing</b></p>
-      <p class="text-right">
-        <%= link_to new_topic_path, class: 'btn btn-primary' do %>
-          <span class="glyphicon glyphicon-plus"></span> Create Topic
-        <% end %>
-      </p>
-    </span>
-    <hr>
-    <%
-      panel_type = ['default','primary','success','info','warning', 'danger']
-    %>
-    <% if topics.present? %>
-      <% topics.each do |topic| %>
-        <div class="panel panel-<%=panel_type[rand(0..5)] %>">
-          <div class="panel-heading">
-            <h4><%= topic.name.to_s.camelcase %></h4>
-          </div>
-          <div class="panel-body">
-            <h5><span class="glyphicon glyphicon-time"></span> <b>Post by </b><%= topic.user.email %>, <%= topic.created_at.strftime("%b %d, %Y") %>.</h5>
-            <p><%= (topic.body || topic.posts.first.body).to_s.truncate(500) %></p>
-          </div>
-          <div class="panel-footer">
-            <% if topic.tag_list.present? %>
-              <span>Tags: <%= topic_tag_label(topic).html_safe %></span>
-            <% end %>
-            <span class="badge badge-warning">Post Count : <%= topic.posts.count %></span>
-            <span class="text-right"><%= link_to('Continue Reading ..', topic_posts_path(topic.slug), class: 'btn btn-link')%></span>
-          </div>
-        </div>
+      <% if create_link %>
+        <p class="text-right">
+          <%= link_to new_topic_path, class: 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-plus"></span> Create Topic
+          <% end %>
+        </p>
       <% end %>
-      <%= will_paginate topics, renderer: BootstrapPagination::Rails %>
-    <% else %>
-      <h4>You don't have any topic yet.</h4>
-    <% end %>
+    </span>
   </div>
+  <hr/>
+  <%
+    panel_type = ['default','primary','success','info','warning', 'danger']
+  %>
+  <% if topics.present? %>
+    <% topics.each do |topic| %>
+      <div class="panel panel-<%=panel_type[rand(0..5)] %>">
+        <div class="panel-heading">
+          <h4><%= topic.name.to_s.camelcase %></h4>
+        </div>
+        <div class="panel-body">
+          <h5><span class="glyphicon glyphicon-time"></span> <b>Post by </b><%= topic.user.email %>, <%= topic.created_at.strftime("%b %d, %Y") %>.</h5>
+          <p><%= (topic.body || topic.posts.first.body).html_safe.truncate(500) %></p>
+        </div>
+        <div class="panel-footer">
+          <% if topic.tag_list.present? %>
+            <span>Tags: <%= topic_tag_label(topic).html_safe %></span>
+          <% end %>
+          <span class="badge badge-warning">Post Count : <%= topic.posts.count %></span>
+          <span class="text-right"><%= link_to('Continue Reading ..', topic_posts_path(topic.slug), class: 'btn btn-link')%></span>
+        </div>
+      </div>
+    <% end %>
+    <%= will_paginate topics, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <h4>You don't have any topic yet.</h4>
+  <% end %>
 </div>

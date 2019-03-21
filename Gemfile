@@ -46,6 +46,9 @@ gem 'jquery-rails'
 gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem "figaro"
+gem 'ckeditor'
+#gem 'carrierwave'
+#gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
