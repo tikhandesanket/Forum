@@ -15,42 +15,49 @@
         <li><%= link_to 'Topics', topics_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
+        <% if true %>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class=" glyphicon glyphicon-user"></span> <%= current_user.email.split('@').first %>
-            <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class=" glyphicon glyphicon-user"></span>
+              <%= current_user ? current_user.email.split('@').first : "Guest User" %>
+              <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu">
-              <li>
-                <%= link_to basic_info_dashboards_path do %>
-                  <span class="glyphicon glyphicon-info-sign"> </span>
-                  My Info
-                <% end %>
-              </li>
-              <li>
-                <%= link_to your_topics_topics_path do %>
-                  <span class="glyphicon glyphicon-th-list"> </span>
-                  My Topics
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                  <span class="glyphicon glyphicon-off"> </span>
-                  Sign Out
-                <% end %>
-              </li>
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to basic_info_dashboards_path do %>
+                    <span class="glyphicon glyphicon-info-sign"> </span>
+                    My Info
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to your_topics_topics_path do %>
+                    <span class="glyphicon glyphicon-th-list"> </span>
+                    My Topics
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <span class="glyphicon glyphicon-off"> </span>
+                    Sign Out
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to new_user_registration_path do %>
+                    <span class="glyphicon glyphicon-user"> </span> Sign Up
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_session_path do %>
+                    <span class="glyphicon glyphicon-log-in"> </span> Sign In
+                  <% end %>
+                </li>
+              <% end %>
             </ul>
           </li>
         <% else %>
-          <li>
-            <%= link_to new_user_registration_path do %>
-              <span class="glyphicon glyphicon-user"> </span> Sign Up
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_session_path do %>
-              <span class="glyphicon glyphicon-log-in"> </span> Sign In
-            <% end %>
-          </li>
+
         <% end %>
       </ul>
     </div>
