@@ -5,12 +5,16 @@
     <h2><%= @topic.name.to_s.titleize %></h2>
     <h5><span class="glyphicon glyphicon-time"></span> Post by <%= @topic.user.email %>, <%= @topic.created_at.strftime('%b %d, %Y') %>.</h5>
     <h5><%= topic_tag_label(@topic).html_safe %></h5><br>
-    <p><%= @topic.body.html_safe || @topic.posts.first.body.html_safe %></p>
+    <p><%= @topic.body.html_safe %></p>
     <hr>
-    <p><span id="js_post_count" class="badge"><%= @posts.count %></span> Comments:</p><br>
+    <p><span id="js_post_count" class="badge"><%= post_count(@topic) %></span> Comments</p><br>
     <div class="row">
-      <% @posts.each do |post| %>
-        <%= render partial: 'comment', locals:{post: post} %>
+      <% if is_comments_avail(@topic) %>
+        <div><div class="col-sm-10 text-red">No comment's available</div></div>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render partial: 'comment', locals:{post: post, first_post_id: @topic.posts.first.id} %>
+        <% end %>
       <% end %>
     </div>
     <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>

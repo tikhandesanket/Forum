@@ -20,4 +20,8 @@ module ApplicationHelper
 		return topic.tag_list.map.with_index { |t,index| link_to(t, tag_path(t), class: "label label-#{label_tag[index]}")}.join(' ')
 	end
 
+	def truncate_html_data(html)
+		return truncate_html(html, length: 250, omission: '...(continued)')
+	end
+
 end

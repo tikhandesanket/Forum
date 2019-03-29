@@ -23,7 +23,7 @@
         </div>
         <div class="panel-body">
           <h5><span class="glyphicon glyphicon-time"></span> <b>Post by </b><%= topic.user.email %>, <%= topic.created_at.strftime("%b %d, %Y") %>.</h5>
-          <p><%= (topic.body || topic.posts.first.body).html_safe.truncate(500) %></p>
+          <p><%= truncate_html_data(topic.body) %></p>
         </div>
         <div class="panel-footer">
           <% if topic.tag_list.present? %>

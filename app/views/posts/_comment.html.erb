@@ -1,4 +1,4 @@
-<% if post.present? && !@errors.present? %>
+<% if post.id != first_post_id && post.present? && !@errors.present? %>
 	<div class="js_leave_comment">
 		<div class="col-sm-2 text-center">
 		  <%= image_tag post.user.photo_url, class: 'img-circle', alt: 'Avatar'%>
