@@ -29,7 +29,7 @@
           <% if topic.tag_list.present? %>
             <span>Tags: <%= topic_tag_label(topic).html_safe %></span>
           <% end %>
-          <span class="badge badge-warning">Post Count : <%= topic.posts.count %></span>
+          <span class="badge badge-warning">Post Count : <%= post_count(topic) %></span>
           <span class="text-right"><%= link_to('Continue Reading ..', topic_posts_path(topic.slug), class: 'btn btn-link')%></span>
         </div>
       </div>
