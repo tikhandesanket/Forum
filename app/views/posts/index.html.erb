@@ -1,23 +1,21 @@
 <div class="row content">
   <div class="col-sm-12">
-    <div class="col-sm-12">
-      <span class="inline-paragraph">
-        <p class="text-left"><b>RECENT POSTS</b></p>
-        <% if current_user && is_current_user_topic(current_user.id, @topic.user_id) %>
-          <p class="text-right">
-            <%= link_to edit_topic_path(@topic.slug), class: 'btn btn-primary' do %>
-              <span class="glyphicon glyphicon-plus"></span> Edit Topic
-            <% end %>
-          </p>
-        <% end %>
-      </span>
-    </div>
+    <span>
+      <p class="text-left"><b>RECENT POSTS</b></p>
+      <% if current_user && is_current_user_topic(current_user.id, @topic.user_id) %>
+        <p class="text-right">
+          <%= link_to edit_topic_path(@topic.slug), class: 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-plus"></span> Edit Topic
+          <% end %>
+        </p>
+      <% end %>
+    </span>
     <hr/>
     <h2><%= @topic.name.to_s.titleize %></h2>
     <h5><span class="glyphicon glyphicon-time"></span> Post by <%= @topic.user.email %>, <%= @topic.created_at.strftime('%b %d, %Y') %>.</h5>
     <h5><%= topic_tag_label(@topic).html_safe %></h5><br>
     <p><%= @topic.body.html_safe %></p>
-    <hr>
+    <hr/>
     <p><span id="js_post_count" class="badge"><%= @topic.posts.count %></span> Comments</p><br>
     <div class="row">
       <% unless @topic.posts.first.id? %>

@@ -46,7 +46,6 @@ class PostsController < ApplicationController
   end
 
   def leave_comment
-    binding.pry
   end
 
   private
