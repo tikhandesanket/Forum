@@ -17,10 +17,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = current_user.topics.build(topic_params)
-    store_first_post_as_topic_body(@topic)
     if @topic.save
       flash[:success] = "Topic created successfully."
-      redirect_to topics_path
+      redirect_to topic_posts_path(@topic.slug)
     else
       flash[:alert] = "Something went wrong"
       @errors = @topic.errors.messages
@@ -32,9 +31,16 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    @topic = current_user.topics.friendly.find(params[:id])
   end
 
   def update
+    @topic = current_user.topics.friendly.find(params[:id])
+    if @topic.update_attributes(topic_params)
+      redirect_to topic_posts_path(@topic.slug)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,13 +52,6 @@ class TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:name, :tag_list, posts_attributes: [:id, :body, :user_id, :_destroy])
+    params.require(:topic).permit(:name, :body, :tag_list)
   end
-
-  def store_first_post_as_topic_body(topic)
-    unless topic.body.present?
-      topic.body = topic.posts.first.body
-    end
-  end
-
 end
