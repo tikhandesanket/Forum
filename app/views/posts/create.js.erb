@@ -6,6 +6,7 @@ var post_count = <%= @topic.posts.count %>
 $("#js_post_count").text(post_count);
 $('#js_message_label').remove();
 $('#no-comment').remove();
+$('#post_body').val(' ');
 <% if @errors.present? %>
 	$("#validation_message").append("<p id='js_message_label' class='alert alert-danger alert-dismissible'>Something went wrong.</p>")
 <% else %>

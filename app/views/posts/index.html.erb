@@ -24,12 +24,13 @@
       </p>
     <% end %>
     <br/>
+
     <p><h4>I like the post? Like this!</h4></p>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <br/>
     <hr>
-    <!-- the comment box -->
+
     <div class="well">
       <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
       <%= form_for @new_post, url: topic_posts_path, :method => :post, html:{id: 'comment_box', multipart: true, remote: true} do |f| %>
@@ -43,13 +44,17 @@
         <% end %>
       <% end %>
     </div>
-    <!-- the comments -->
+
     <span id="validation_message"></span>
     <hr>
     <h4 class="page-header">Comments</h4>
     <section class="comment-list">
       <% unless @topic.posts.first.id? %>
-        <div class="js_leave_comment" id='no-comment'><div class="col-sm-10 text-red">No comment's available</div></div>
+        <div class="js_leave_comment" id='no-comment'>
+          <div class="col-sm-10 text-red well">
+            No comment's available !!
+          </div>
+        </div>
       <% else %>
         <% @posts.each do |post| %>
           <%= render partial: 'comment', locals:{post: post} %>
@@ -58,30 +63,27 @@
       <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
     </section>
   </div>
-
   <div class="col-lg-4">
     <div class="well">
       <h4><i class="fa fa-search"></i> Blog Search...</h4>
       <div class="input-group">
-          <input type="text" class="form-control">
-          <span class="input-group-btn">
-              <button class="btn btn-default" type="button">
-                  <i class="fa fa-search"></i>
-              </button>
-          </span>
+        <input type="text" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
       </div>
-      <!-- /input-group -->
     </div>
-    <!-- /well -->
+
     <div class="well">
       <h4><i class="fa fa-tags"></i> Popular Tags:</h4>
         <div class="row">
           <div class="col-lg-12">
-              <ul class="list-unstyled">
-                <%= popular_tags(10).html_safe %>
-              </ul>
+            <ul class="list-unstyled">
+              <%= popular_tags(10).html_safe %>
+            </ul>
           </div>
-
         </div>
       </div>
 
