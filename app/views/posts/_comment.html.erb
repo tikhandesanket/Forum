@@ -1,12 +1,57 @@
 <% if post.present? && !@errors.present? %>
 	<div class="js_leave_comment">
-		<div class="col-sm-2 text-center">
-		  <%= image_tag post.user.photo_url, class: 'img-circle', alt: 'Avatar'%>
-		</div>
-		<div class="col-sm-10">
-		  <h4><%= post.user.email.split('@')[0]%> <small><%= post.created_at.strftime('%b %d, %Y, %H:%M %p')%></small></h4>
-		  <p><%= post.body.html_safe %></p>
-		  <br>
-		</div>
+		<article class="row">
+		  <div class="col-md-2 col-sm-2 hidden-xs">
+		    <figure class="thumbnail">
+		      <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+		    </figure>
+		  </div>
+		  <div class="col-md-10 col-sm-10">
+		    <div class="panel panel-default arrow left">
+		      <div class="panel-body">
+		        <header class="text-left">
+		          <div class="comment-user"><i class="fa fa-user"></i> <%= post.user.email %></div>
+		          <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> <%= post.created_at.strftime("%b %d, %Y")%></time>
+		        </header>
+		        <div class="comment-post">
+		          <p>
+		            <%= post.body.html_safe %>
+		          </p>
+		        </div>
+		        <p class="text-right">
+		        	<a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a>
+		        </p>
+		      </div>
+		    </div>
+		  </div>
+		</article>
 	</div>
+<% end %>
+
+<% if false %>
+<article class="row">
+  <div class="col-md-2 col-sm-2 col-md-offset-1 col-sm-offset-0 hidden-xs">
+    <figure class="thumbnail">
+      <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+      <figcaption class="text-center">username</figcaption>
+    </figure>
+  </div>
+  <div class="col-md-9 col-sm-9">
+    <div class="panel panel-default arrow left">
+      <div class="panel-heading right">Reply</div>
+      <div class="panel-body">
+        <header class="text-left">
+          <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+          <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+        </header>
+        <div class="comment-post">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+      </div>
+    </div>
+  </div>
+</article>
 <% end %>

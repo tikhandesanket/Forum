@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :posts
 
   def photo_url
-    return 'http://res.cloudinary.com/ddbkhb3vl/image/asset/v1517130970/default-f923b61d87de05d96ee32141d21c6e68.png'
+    return 'https://res.cloudinary.com/ddbkhb3vl/image/upload/v1554198140/user-avatar-placeholder_rbjvlt.png'
   end
 
 end

@@ -1,23 +1,53 @@
-<div class="row content">
-  <div class="col-sm-12">
-    <span>
-      <p class="text-left"><b>RECENT POSTS</b></p>
-      <% if current_user && is_current_user_topic(current_user.id, @topic.user_id) %>
-        <p class="text-right">
-          <%= link_to edit_topic_path(@topic.slug), class: 'btn btn-primary' do %>
-            <span class="glyphicon glyphicon-plus"></span> Edit Topic
-          <% end %>
-        </p>
+<div class="row">
+  <div class="col-lg-8">
+    <h1 class="text-primary"><%= @topic.name %></h1>
+    <p class="lead">
+      <i class="fa fa-user"></i> by
+      <span class="text-primary"><%= @topic.user.email %></span>
+    </p>
+    <hr>
+    <p>
+      <i class="fa fa-calendar"></i>
+      Posted on <%= @topic.created_at.strftime("%B %d, %Y at %H:%M %p") %>
+    </p>
+    <p>
+      <i class="fa fa-tags"></i>
+      Tags: <%= topic_tag_label(@topic).html_safe %>
+    </p>
+    <hr>
+    <%= @topic.body.html_safe %>
+    <br/>
+    <% if current_user && is_current_user_topic(current_user.id, @topic.user_id) %>
+      <p class="text-left">
+        <%= link_to 'Edit', edit_topic_path(@topic.slug), class: 'btn btn-sm btn-primary' %>
+        <%= link_to 'Delete', "#", class: 'btn btn-sm btn-danger' %>
+      </p>
+    <% end %>
+    <br/>
+    <p><h4>I like the post? Like this!</h4></p>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <br/>
+    <hr>
+    <!-- the comment box -->
+    <div class="well">
+      <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
+      <%= form_for @new_post, url: topic_posts_path, :method => :post, html:{id: 'comment_box', multipart: true, remote: true} do |f| %>
+        <% if current_user.present? %>
+          <div class="form-group">
+            <%= render partial: 'form', locals:{f: f}%>
+          </div>
+          <%= f.submit "Submit", class: "btn btn-success" %>
+        <% else %>
+          You have to login to access comment section. <%= link_to "Already have an account?", new_user_session_path, class: 'btn btn-success btn-sm'%> <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm"%>
+        <% end %>
       <% end %>
-    </span>
-    <hr/>
-    <h2><%= @topic.name.to_s.titleize %></h2>
-    <h5><span class="glyphicon glyphicon-time"></span> Post by <%= @topic.user.email %>, <%= @topic.created_at.strftime('%b %d, %Y') %>.</h5>
-    <h5><%= topic_tag_label(@topic).html_safe %></h5><br>
-    <p><%= @topic.body.html_safe %></p>
-    <hr/>
-    <p><span id="js_post_count" class="badge"><%= @topic.posts.count %></span> Comments</p><br>
-    <div class="row">
+    </div>
+    <!-- the comments -->
+    <span id="validation_message"></span>
+    <hr>
+    <h4 class="page-header">Comments</h4>
+    <section class="comment-list">
       <% unless @topic.posts.first.id? %>
         <div class="js_leave_comment" id='no-comment'><div class="col-sm-10 text-red">No comment's available</div></div>
       <% else %>
@@ -25,21 +55,44 @@
           <%= render partial: 'comment', locals:{post: post} %>
         <% end %>
       <% end %>
+      <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+    </section>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="well">
+      <h4><i class="fa fa-search"></i> Blog Search...</h4>
+      <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                  <i class="fa fa-search"></i>
+              </button>
+          </span>
+      </div>
+      <!-- /input-group -->
     </div>
-    <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
-    <hr/>
-    <span id="validation_message"></span>
-    <h4>Share Your Thoughts</h4>
-    <%= form_for @new_post, url: topic_posts_path, :method => :post, html:{id: 'comment_box', multipart: true, remote: true} do |f| %>
-      <% if current_user.present? %>
-        <div class="form-group">
-          <%= render partial: 'form', locals:{f: f}%>
+    <!-- /well -->
+    <div class="well">
+      <h4><i class="fa fa-tags"></i> Popular Tags:</h4>
+        <div class="row">
+          <div class="col-lg-12">
+              <ul class="list-unstyled">
+                <%= popular_tags(10).html_safe %>
+              </ul>
+          </div>
+
         </div>
-        <%= f.submit "Submit", class: "btn btn-success" %>
-      <% else %>
-        You have to login to access comment section. <%= link_to "Already have an account?", new_user_session_path, class: 'btn btn-success btn-sm'%> <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm"%>
-      <% end %>
-    <% end %>
-    <br><br>
+      </div>
+
+      <div class="well">
+        <h4><i class="fa fa-fire"></i> Popular Posts:</h4>
+        <ul>
+          <% popular_topics(10).each do |topic| %>
+            <li><%= link_to(topic.name, topic_posts_path(topic.slug))%></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
