@@ -10,12 +10,9 @@
       <% end %>
     </span>
     <hr/>
-    <%
-      panel_type = ['default','primary','success','info','warning', 'danger']
-    %>
     <% if topics.present? %>
       <% topics.each do |topic| %>
-        <div class="panel panel-<%=panel_type[rand(0..5)] %>">
+        <div class="panel panel-success">
           <div class="panel-heading">
             <h4><%= topic.name.to_s.camelcase %></h4>
           </div>
