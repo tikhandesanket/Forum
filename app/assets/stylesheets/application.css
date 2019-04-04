@@ -47,3 +47,12 @@ html, body {
 span.inline-paragraph p.text-left{
 	float: left;
 }
+
+.btn{
+	margin-bottom: 5px;
+}
+@media screen and (max-width: 767px) {
+  .btn {
+    width: 100%;
+  }
+}
