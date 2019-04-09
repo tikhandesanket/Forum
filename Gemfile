@@ -47,8 +47,9 @@ gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem "figaro"
 gem 'ckeditor'
-#gem 'carrierwave'
-#gem 'mini_magick'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'cloudinary'
 gem 'truncate_html', '~> 0.9.3'
 gem "font-awesome-rails"
 
