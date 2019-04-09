@@ -30,7 +30,7 @@ Ckeditor.setup do |config|
   # config.parent_controller = 'MyController'
 
   # Asset model classes
-  # config.picture_model { Ckeditor::Picture }
+  config.picture_model { Ckeditor::Picture }
   # config.attachment_file_model { Ckeditor::AttachmentFile }
 
   # Paginate assets
@@ -40,7 +40,7 @@ Ckeditor.setup do |config|
   # Customize ckeditor assets path
   # By default: nil
   # config.asset_path = 'http://www.example.com/assets/ckeditor/'
-
+  Rails.application.config.assets.precompile += %w( ckeditor/filebrowser/images/gal_del.png )
   # To reduce the asset precompilation time, you can limit plugins and/or languages to those you need:
   # By default: nil (no limit)
   # config.assets_languages = ['en', 'uk']
@@ -49,10 +49,10 @@ Ckeditor.setup do |config|
   # CKEditor CDN
   # More info here http://cdn.ckeditor.com/
   # By default: nil (CDN disabled)
-  # config.cdn_url = '//cdn.ckeditor.com/4.11.1/standard/ckeditor.js'
+  config.cdn_url = '//cdn.ckeditor.com/4.11.1/standard/ckeditor.js'
 
   # JS config url
   # Used when CKEditor CDN enabled
   # By default: "ckeditor/config.js"
-  # config.js_config_url = 'ckeditor/config.js'
+  config.js_config_url = 'ckeditor/config.js'
 end

@@ -28,6 +28,8 @@ class CkeditorPictureUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :extract_dimensions
+
   [:extract_content_type, :extract_size, :extract_dimensions].each do |method|
     define_method :"#{method}_with_cloudinary" do
       send(:"#{method}_without_cloudinary") if self.file.is_a?(CarrierWave::SanitizedFile)
@@ -36,8 +38,6 @@ class CkeditorPictureUploader < CarrierWave::Uploader::Base
     alias_method :"#{method}_without_cloudinary", method
     alias_method method, :"#{method}_with_cloudinary"
   end
-
-  process :extract_dimensions
 
   # Create different versions of your uploaded files:
   version :thumb do
