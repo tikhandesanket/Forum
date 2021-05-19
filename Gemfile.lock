@@ -183,8 +183,10 @@ GEM
       method_source (~> 0.9.0)
       spoon (~> 0.0)
     public_suffix (3.0.3)
-    puma (3.12.0)
-    puma (3.12.0-java)
+    puma (5.3.1)
+      nio4r (~> 2.0)
+    puma (5.3.1-java)
+      nio4r (~> 2.0)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -271,7 +273,10 @@ GEM
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
+    unf (0.1.4-java)
     unf_ext (0.0.7.5)
+    unf_ext (0.0.7.5-x64-mingw32)
+    unf_ext (0.0.7.5-x86-mingw32)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -316,7 +321,7 @@ DEPENDENCIES
   mini_magick
   pg (~> 0.18.4)
   pry
-  puma (~> 3.7)
+  puma (~> 5.3)
   rails (~> 5.1.2)
   sass-rails (~> 5.0)
   selenium-webdriver
